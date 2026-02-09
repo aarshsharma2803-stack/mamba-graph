@@ -1,17 +1,3 @@
-"""
-Mamba-Graph: Enterprise Repository Cartographer (GTC 2026 Edition)
-Engine: NVIDIA Nemotron-Nano-9B-v2 (Mamba-2/Transformer Hybrid)
-
-Features:
-  - Deep Metadata Extraction with Complexity Scoring
-  - GitHub/GitLab/Bitbucket URL Cloning
-  - Persistent API Key (save once, use always)
-  - Dual-Channel SSE Streaming (Reasoning + Content)
-  - Interactive Query Mode
-  - Hotspot Detection + Dependency Table
-  - Export: JSON, Mermaid
-"""
-
 import os
 import re
 import json
@@ -34,9 +20,6 @@ from pydantic import BaseModel, Field
 from openai import OpenAI
 from dotenv import load_dotenv
 
-# ─────────────────────────────────────────────────────────────────────────────
-# SETUP
-# ─────────────────────────────────────────────────────────────────────────────
 load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(name)s | %(message)s")
 logger = logging.getLogger("MambaGraph")
@@ -207,9 +190,6 @@ class FileNodeInfo(BaseModel):
     has_tests: bool = False
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# API KEY MANAGER
-# ─────────────────────────────────────────────────────────────────────────────
 class APIKeyManager:
     @staticmethod
     def get_key(request_key: Optional[str] = None) -> str:
@@ -236,9 +216,7 @@ class APIKeyManager:
         return bool(os.getenv("NVIDIA_API_KEY", "").strip())
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# REPO RESOLVER (Local + URL)
-# ─────────────────────────────────────────────────────────────────────────────
+
 class RepoResolver:
     @staticmethod
     def is_url(path: str) -> bool:
@@ -305,9 +283,7 @@ class RepoResolver:
         return os.path.abspath(path)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# COMPLEXITY ANALYZER
-# ─────────────────────────────────────────────────────────────────────────────
+
 class ComplexityAnalyzer:
     BRANCH_KW = {
         ".py": ["if ", "elif ", "else:", "for ", "while ", "except ", "with "],
@@ -337,9 +313,7 @@ class ComplexityAnalyzer:
         return round(min((density * 0.4 + nesting * 0.35 + length * 0.25) * 100, 100), 1)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# REPOSITORY PROCESSOR
-# ─────────────────────────────────────────────────────────────────────────────
+
 class RepositoryProcessor:
     def __init__(self, root: str, max_files=120, include_tests=False, depth=6):
         self.root = root
@@ -543,9 +517,7 @@ class RepositoryProcessor:
         return payload, meta_list, summary
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# NEMOTRON ORCHESTRATOR
-# ─────────────────────────────────────────────────────────────────────────────
+
 class NemotronOrchestrator:
     def __init__(self, api_key: str):
         self.client = OpenAI(base_url=NVIDIA_BASE_URL, api_key=api_key)
