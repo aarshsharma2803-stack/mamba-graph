@@ -1,9 +1,6 @@
 # 🧠 Mamba-Graph
 
 **AI-Powered 3D Repository Cartographer** — Visualize any codebase as an interactive 3D force graph powered by NVIDIA Nemotron-Nano-9B-v2.
-
-![Mamba-Graph](https://img.shields.io/badge/NVIDIA-Nemotron_9B-76b900?style=for-the-badge&logo=nvidia)
-
 ---
 
 ## ✨ Features
@@ -146,22 +143,6 @@ mamba-graph/
 ├── .gitignore
 └── README.md
 ```
-
----
-
-## 🔑 API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/analyze` | Map a repository (SSE stream) |
-| POST | `/api/v1/query` | Ask about the codebase (SSE stream) |
-| POST | `/api/v1/security` | Security vulnerability scan (SSE stream) |
-| POST | `/api/v1/onboarding` | Generate onboarding guide (SSE stream) |
-| POST | `/api/v1/cuda` | GPU/CUDA performance analysis (SSE stream) |
-| POST | `/api/v1/save-key` | Save NVIDIA API key |
-| GET | `/api/v1/check-key` | Check if API key exists |
-| DELETE | `/api/v1/cache` | Clear cloned repo cache |
-
 ---
 
 ## 🌐 Supported Languages
@@ -175,5 +156,3 @@ Python, JavaScript, TypeScript, React (JSX/TSX), C, C++, CUDA, Rust, Go, Java, K
 MIT
 
 ---
-
-**Built with 🧠 NVIDIA Nemotron for GTC 2026**
